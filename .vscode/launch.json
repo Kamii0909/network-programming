@@ -1,0 +1,24 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "StudentIn4Main",
+            "request": "launch",
+            "mainClass": "edu.hust.it4060.StudentIn4Main",
+            "projectName": "app",
+            "vmArgs": "--enable-preview"
+        },
+        {
+            "type": "java",
+            "name": "GreetAndLogMain",
+            "request": "launch",
+            "mainClass": "edu.hust.it4060.GreetAndLogMain",
+            "projectName": "app",
+            "vmArgs": "--enable-preview"
+        }
+    ]
+}
