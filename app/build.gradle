@@ -18,17 +18,16 @@ application {
 }
 
 dependencies {
-    implementation(platform('org.springframework.boot:spring-boot-dependencies:3.0.5'))
+    implementation platform('org.springframework.boot:spring-boot-dependencies:3.0.5')
 
-    implementation 'org.slf4j:slf4j-api'
-    runtimeOnly 'org.apache.logging.log4j:log4j-slf4j2-impl'
-    runtimeOnly 'org.apache.logging.log4j:log4j-core'
-    runtimeOnly 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml'
-
+    implementation "org.slf4j:slf4j-api"
+    runtimeOnly "org.apache.logging.log4j:log4j-slf4j2-impl"
+    runtimeOnly "org.apache.logging.log4j:log4j-core"
+    runtimeOnly "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml"
     implementation "com.google.guava:guava:${guava}"
     implementation "com.google.inject:guice:${guice}"
 
-    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation "org.junit.jupiter:junit-jupiter"
 }
 
 compileJava {
