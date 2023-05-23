@@ -6,3 +6,9 @@ Ha Trung Kien 20190078
 [Task 1, 2](app/src/main/java/edu/hust/it4060/GreetAndLogMain.java)
 
 [Task 3, 4](app/src/main/java/edu/hust/it4060/StudentIn4Main.java)
+
+## Assignment 2: 
+
+[Task 1, 2](app/src/main/java/edu/hust/it4060/bootstrap/udp/UDP1Main.java)
+
+[Task 3, 4](app/src/main/java/edu/hust/it4060/bootstrap/udp/UDP2Main.java)

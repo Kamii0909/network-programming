@@ -1,4 +1,4 @@
-package edu.hust.it4060.blocking.server;
+package edu.hust.it4060.bootstrap.blocking.server;
 
 import java.io.FileWriter;
 import java.io.IOException;

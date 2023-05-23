@@ -1,4 +1,4 @@
-package edu.hust.it4060.blocking.client;
+package edu.hust.it4060.bootstrap.blocking.client;
 
 import java.io.IOException;
 import java.net.InetAddress;

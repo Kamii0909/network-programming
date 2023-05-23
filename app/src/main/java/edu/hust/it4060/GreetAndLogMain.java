@@ -6,14 +6,14 @@ import java.net.InetAddress;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import edu.hust.it4060.blocking.client.SendLineSocketAdapter;
-import edu.hust.it4060.blocking.server.GreetAndLogSocketAdapter;
+import edu.hust.it4060.bootstrap.blocking.client.SendLineSocketAdapter;
+import edu.hust.it4060.bootstrap.blocking.server.GreetAndLogSocketAdapter;
 import edu.hust.it4060.common.ArgumentsUtillities;
+import edu.hust.it4060.common.WebServer;
 import edu.hust.it4060.common.client.TCPClient;
 import edu.hust.it4060.common.client.TCPClientFactory;
 import edu.hust.it4060.common.server.IOStrategy;
-import edu.hust.it4060.common.server.TCPServer;
-import edu.hust.it4060.common.server.TCPServerFactory;
+import edu.hust.it4060.common.server.WebServerFactory;
 import edu.hust.it4060.common.socket.BlockingSocketHandler;
 
 public class GreetAndLogMain {
@@ -27,14 +27,14 @@ public class GreetAndLogMain {
         
         GreetAndLogSocketAdapter.initialize(holder.getGreetingFilePath(), holder.getLogFilePath());
         try (
-            TCPServer server = TCPServerFactory.create(
+            WebServer server = WebServerFactory.create(
                 (BlockingSocketHandler) s -> new GreetAndLogSocketAdapter(s).handle(),
                 serverAddress, serverPort, IOStrategy.BLOCKING);
             TCPClient client = TCPClientFactory.create(
                 (BlockingSocketHandler) s -> new SendLineSocketAdapter(s).handle(),
                 serverAddress, serverPort, IOStrategy.BLOCKING);) {
             
-            Thread serverThread = server.start();
+            Thread serverThread = server.run();
             server.addShutdownHook();
             
             client.connect();

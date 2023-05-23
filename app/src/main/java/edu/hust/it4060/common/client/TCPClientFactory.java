@@ -2,7 +2,7 @@ package edu.hust.it4060.common.client;
 
 import java.net.InetAddress;
 
-import edu.hust.it4060.blocking.client.BlockingTCPClient;
+import edu.hust.it4060.bootstrap.blocking.client.BlockingTCPClient;
 import edu.hust.it4060.common.server.IOStrategy;
 import edu.hust.it4060.common.socket.BlockingSocketHandler;
 import edu.hust.it4060.common.socket.SocketHandler;

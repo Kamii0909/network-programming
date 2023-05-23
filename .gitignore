@@ -4,6 +4,8 @@
 # Logs
 *.logs
 
+udp/files
+
 .gradle
 **/build/
 !src/**/build/
