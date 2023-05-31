@@ -2,4 +2,7 @@
     "java.compile.nullAnalysis.mode": "automatic",
     "java.configuration.updateBuildConfiguration": "automatic",
     "java.dependency.packagePresentation": "hierarchical",
+    "java.test.config": {
+        "vmArgs": ["--enable-preview"]
+    }
 }

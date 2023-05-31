@@ -8,4 +8,4 @@
  */
 
 rootProject.name = 'hw1'
-include('app')
+include 'app', 'homework'

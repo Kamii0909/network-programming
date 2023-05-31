@@ -1,0 +1,37 @@
+Configuration:
+    status: info
+    name: Network Programming Logging Configuration
+    properties:
+        property:
+            - name: info-file
+              value: ./logs/server-info.logs
+            - name: log-pattern
+              value: "%d{yyyy-MM-dd HH:mm:ss.SSS}  %level %pid --- [%15.15t] %20.50C{-3} : %m%n%ex"
+    thresholdFilter:
+        level: debug
+
+    appenders:
+        Console:
+            name: Console Logging
+            target: SYSTEM_OUT
+            PatternLayout:
+                pattern: ${log-pattern}
+        File:
+            name: File Logging Info
+            fileName: ${info-file}
+            PatternLayout:
+                pattern: ${log-pattern}
+            Filters:
+                ThresholdFilter:
+                    level: info
+    loggers:
+        logger:
+            name: edu.hust.it4060.blocking
+            level: info
+            additivity: true
+            appender-ref:
+                - ref: File Logging Info
+        Root:
+            level: info
+            AppenderRef:
+                - ref: Console Logging

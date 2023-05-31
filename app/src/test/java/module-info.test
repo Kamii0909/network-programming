@@ -1,0 +1,4 @@
+open module network.test {
+    requires network.core;
+    requires org.junit.jupiter.api;
+}

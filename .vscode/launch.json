@@ -6,6 +6,29 @@
     "configurations": [
         {
             "type": "java",
+            "name": "StudentIn4Main",
+            "request": "launch",
+            "mainClass": "homework.week1.StudentIn4Main",
+            "projectName": "app"
+        },
+        {
+            "type": "java",
+            "name": "GreetAndLogMain",
+            "request": "launch",
+            "mainClass": "homework.week1.GreetAndLogMain",
+            "projectName": "app",
+            "vmArgs": "--enable-preview"
+        },
+        {
+            "type": "java",
+            "name": "Default",
+            "request": "launch",
+            "mainClass": "${file}",
+            "projectName": "app",
+            "vmArgs": "--enable-preview"
+        },
+        {
+            "type": "java",
             "name": "UDP2Main$FileTransferPacketHandler",
             "request": "launch",
             "mainClass": "edu.hust.it4060.bootstrap.udp.UDP2Main$FileTransferPacketHandler",
