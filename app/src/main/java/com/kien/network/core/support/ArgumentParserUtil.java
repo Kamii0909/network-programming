@@ -95,6 +95,17 @@ public class ArgumentParserUtil {
             
             return new ParsingContext(sk, ImmutableSet.copyOf(extraFullKeys));
         }
+        
+        /**
+         * Create a parsing context contains only 2 key mapping:
+         * <ol>
+         * <li>h -> host</li>
+         * <li>p -> port</li>
+         * </ol>
+         */
+        public static ParsingContext defaultNetworkContext() {
+            return createNetworkContext(Collections.emptyMap(), Collections.emptySet());
+        }
     }
     
     public static NetworkArguments parseArguments(String[] args, ParsingContext context)

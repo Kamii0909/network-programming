@@ -26,7 +26,7 @@ Configuration:
                     level: info
     loggers:
         logger:
-            name: edu.hust.it4060.blocking
+            name: edu.hust.it4060.homework
             level: info
             additivity: true
             appender-ref:

@@ -13,36 +13,13 @@ application {
     applicationDefaultJvmArgs = ['--enable-preview']
 }
 
-eclipse {
-    classpath {
-        containers 'org.eclipse.buildship.core.gradleclasspathcontainer'
-        file {
-            whenMerged {
-                entries.findAll { it.properties.kind.equals('lib') && !it.properties.path.contains("junit") }.each {
-                    it.entryAttributes['module'] = 'true'
-                }
-                entries.findAll { it.properties.path.startsWith('org.eclipse.jdt.launching.JRE_CONTAINER') }.each {
-                    it.entryAttributes['module'] = 'true'
-                }
-                entries.find { it.path == 'src/main/java' }.output = 'bin/main'
+java {
+    sourceCompatibility = 19
+    targetCompatibility = 19
+}
 
-                def testSrc = entries.find { it.path == 'src/test/java' }
-                testSrc.output = 'bin/test'
-                testSrc.entryAttributes['test'] = 'true'
-                testSrc.entryAttributes['optional'] = 'true'
-                testSrc.entryAttributes['ignore_optional_problems'] = 'true'
-
-                entries.forEach { entry ->
-					def entryIn = { it.find { file(entry.path).equals(it) } }
-					if (entry.kind == 'lib') {
-						entry.entryAttributes['test'] =
-							entryIn(configurations.testRuntimeClasspath) &&
-							!entryIn(configurations.runtimeClasspath)
-					}
-	            }
-            }
-        }
-    }
+ext {
+    awaitility = "4.2.0"
 }
 
 dependencies {
@@ -55,6 +32,7 @@ dependencies {
     runtimeOnly "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml"
 
     testImplementation "org.junit.jupiter:junit-jupiter"
+    implementation "org.awaitility:awaitility:${awaitility}"
 }
 
 tasks.withType(JavaCompile).configureEach {

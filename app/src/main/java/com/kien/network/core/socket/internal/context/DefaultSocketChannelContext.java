@@ -18,10 +18,8 @@ public final class DefaultSocketChannelContext extends AbstractSocketContext<Soc
         SocketChannelAdapter socketAdapter,
         SelectionKey selectionKey) {
         super(socket, socketAdapter);
-        try {
-            socket.configureBlocking(false);
-        } catch (IOException e) {
-            throw new IllegalStateException(e);
+        if (socket.isBlocking()) {
+            throw new IllegalStateException("Socket cannot be blocking");
         }
         this.selectionKey = selectionKey;
     }
@@ -36,13 +34,15 @@ public final class DefaultSocketChannelContext extends AbstractSocketContext<Soc
                 socket.write(writeBuffer);
                 if (writeBuffer.remaining() == 0) {
                     // We have written everything
-                    selectionKey.interestOpsAnd(~SelectionKey.OP_WRITE);
+                    selectionKey.interestOps(SelectionKey.OP_READ);
                     break;
                 }
             }
             if (writeBuffer.remaining() > 0) {
                 // We will comeback to write this later, not now
-                selectionKey.interestOpsOr(SelectionKey.OP_WRITE);
+                selectionKey.interestOps(SelectionKey.OP_WRITE);
+            } else {
+                writeBuffer.clear();
             }
         } catch (IOException e) {
             throw new IllegalStateException(e);
@@ -73,7 +73,7 @@ public final class DefaultSocketChannelContext extends AbstractSocketContext<Soc
     
     @Override
     public void write(ByteBuffer data) {
-        if (writeBuffer.remaining() < data.remaining()) {
+        if (writeBuffer.remaining() >= data.remaining()) {
             writeBuffer.put(data);
         } else {
             // resize the write buffer, this should be rare.

@@ -2,16 +2,18 @@ package edu.hust.it4060.homework.blocking.client;
 
 import java.util.Scanner;
 
-import com.kien.network.core.DelimiterConstants;
-import com.kien.network.core.support.adapter.AbstractLineBasedSocketAdapter;
+import com.kien.network.core.support.adapter.AbstractLineBasedBlockingSocketAdapter;
 
-public class SendLineSocketAdapter extends AbstractLineBasedSocketAdapter {
+class SendLineSocketAdapter extends AbstractLineBasedBlockingSocketAdapter {
     private static final Scanner SCANNER = new Scanner(System.in);
     private final StringBuilder builder;
     
     public SendLineSocketAdapter() {
-        super(DelimiterConstants.DELIMITER);
         builder = new StringBuilder();
+    }
+    
+    public String getServerSentString() {
+        return builder.toString();
     }
     
     @Override
@@ -26,6 +28,12 @@ public class SendLineSocketAdapter extends AbstractLineBasedSocketAdapter {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    
+    @Override
+    protected void onClosed() {
+        readAvailableLines();
+        System.out.println("Server sent something, in case you missed it: " + builder);
     }
     
     private void readFromCommandLine() {

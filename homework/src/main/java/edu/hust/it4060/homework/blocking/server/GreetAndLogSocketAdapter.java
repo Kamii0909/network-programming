@@ -4,39 +4,32 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.kien.network.core.DelimiterConstants;
-import com.kien.network.core.support.adapter.AbstractLineBasedSocketAdapter;
+import com.kien.network.core.support.adapter.AbstractLineBasedBlockingSocketAdapter;
 
-public class GreetAndLogSocketAdapter extends AbstractLineBasedSocketAdapter {
+class GreetAndLogSocketAdapter extends AbstractLineBasedBlockingSocketAdapter {
     private static final Logger log = LoggerFactory.getLogger(GreetAndLogSocketAdapter.class);
     private static FileWriter writer;
     private static String greeting;
     
     // Checked exception oh my fucking god
-    public static void initialize(String greetingFilePath, String logFilePath) throws IOException {
-        File logFile = Paths.get(logFilePath).toFile();
-        log.info("Greeting file path is: {}", Paths.get(greetingFilePath).toAbsolutePath());
-        log.info("Log file path is: {}", logFile.getAbsolutePath());
-        
+    public static void initialize(Path greetingFilePath, Path logFilePath) throws IOException {
+        File logFile = logFilePath.toFile();
         if (logFile.createNewFile()) {
             log.info("Created log file at {}", logFile.getAbsolutePath());
         }
-        
         GreetAndLogSocketAdapter.writer = new FileWriter(logFile, true);
-        GreetAndLogSocketAdapter.greeting = Files.readString(Paths.get(greetingFilePath));
-        
-        log.info("Greeting: {}", greeting);
+        GreetAndLogSocketAdapter.greeting = Files.readString(greetingFilePath);
     }
     
-    private final StringBuilder builder = new StringBuilder();
+    private final StringBuilder builder;
     
     public GreetAndLogSocketAdapter() {
-        super(DelimiterConstants.DELIMITER);
+        builder = new StringBuilder();
     }
     
     @Override

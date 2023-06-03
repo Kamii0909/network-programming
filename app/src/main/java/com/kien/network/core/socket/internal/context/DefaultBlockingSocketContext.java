@@ -43,6 +43,18 @@ public final class DefaultBlockingSocketContext extends AbstractSocketContext<So
         }
     }
     
+    public int blockingRead(byte[] buffer) {
+        try {
+            int read = socketInputStream.read(buffer);
+            if (read > 0) {
+                socketAdapter.onRead(this, Arrays.copyOf(buffer, read));
+            }
+            return read;
+        } catch (IOException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+    
     @Override
     public void close() {
         try {

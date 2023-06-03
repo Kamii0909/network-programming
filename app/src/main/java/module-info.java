@@ -7,5 +7,5 @@ module network.core {
     exports com.kien.network.core.socket.api.adapter;
     
     requires com.google.common;
-    requires org.slf4j;
+    requires transitive org.slf4j;
 }

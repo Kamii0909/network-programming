@@ -6,49 +6,35 @@
     "configurations": [
         {
             "type": "java",
-            "name": "StudentIn4Main",
+            "name": "NoClientChatServerMain",
             "request": "launch",
-            "mainClass": "homework.week1.StudentIn4Main",
-            "projectName": "app"
+            "mainClass": "edu.hust.it4060.homework.week3.NoClientChatServerMain",
+            "projectName": "homework"
         },
         {
             "type": "java",
-            "name": "GreetAndLogMain",
+            "name": "ChatServerMain",
             "request": "launch",
-            "mainClass": "homework.week1.GreetAndLogMain",
-            "projectName": "app",
-            "vmArgs": "--enable-preview"
+            "mainClass": "edu.hust.it4060.homework.week3.ChatServerMain",
+            "projectName": "homework"
         },
         {
             "type": "java",
-            "name": "Default",
+            "name": "Bai34Main",
             "request": "launch",
-            "mainClass": "${file}",
-            "projectName": "app",
-            "vmArgs": "--enable-preview"
+            "mainClass": "edu.hust.it4060.homework.week1.Bai34Main",
+            "projectName": "homework",
+            "vmArgs": "--enable-preview",
+            "args": "-h localhost -p 8080"
         },
         {
             "type": "java",
-            "name": "UDP2Main$FileTransferPacketHandler",
+            "name": "Bai12Main",
             "request": "launch",
-            "mainClass": "edu.hust.it4060.bootstrap.udp.UDP2Main$FileTransferPacketHandler",
-            "projectName": "app"
-        },
-        {
-            "type": "java",
-            "name": "UDP2Main",
-            "request": "launch",
-            "mainClass": "edu.hust.it4060.bootstrap.udp.UDP2Main",
-            "projectName": "app",
-            "vmArgs": "--enable-preview"
-        },
-        {
-            "type": "java",
-            "name": "UDPMain",
-            "request": "launch",
-            "mainClass": "edu.hust.it4060.bootstrap.udp.UDP1Main",
-            "projectName": "app",
-            "vmArgs": "--enable-preview"
+            "mainClass": "edu.hust.it4060.homework.week1.Bai12Main",
+            "projectName": "homework",
+            "vmArgs": "--enable-preview",
+            "args": "-h localhost -p 8080"
         }
     ]
 }

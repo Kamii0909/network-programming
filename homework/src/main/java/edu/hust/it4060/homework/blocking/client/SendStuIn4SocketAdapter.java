@@ -3,15 +3,13 @@ package edu.hust.it4060.homework.blocking.client;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-import com.kien.network.core.DelimiterConstants;
-import com.kien.network.core.support.adapter.AbstractLineBasedSocketAdapter;
+import com.kien.network.core.support.adapter.AbstractLineBasedBlockingSocketAdapter;
 
-public class SendStuIn4SocketAdapter extends AbstractLineBasedSocketAdapter {
+class SendStuIn4SocketAdapter extends AbstractLineBasedBlockingSocketAdapter {
     private static final Scanner SCANNER = new Scanner(System.in);
     private final StringBuilder builder;
     
     public SendStuIn4SocketAdapter() {
-        super(DelimiterConstants.DELIMITER);
         builder = new StringBuilder();
     }
     
@@ -61,6 +59,14 @@ public class SendStuIn4SocketAdapter extends AbstractLineBasedSocketAdapter {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected void onClosed() {
+        if (builder.isEmpty()) {
+            return;
+        }
+        System.out.println("Server sent something, in case you missed it: " + builder);
     }
     
 }

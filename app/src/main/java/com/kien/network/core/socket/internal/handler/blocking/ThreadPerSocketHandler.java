@@ -1,9 +1,7 @@
 package com.kien.network.core.socket.internal.handler.blocking;
 
-import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.util.Arrays;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -73,26 +71,20 @@ public final class ThreadPerSocketHandler extends AbstractSocketHandler<Socket, 
         @Override
         public void run() {
             BlockingSocketAdapter adapter = context.getSocketAdapter();
-            Socket socket = context.getSocket();
+            context.getSocket();
             adapter.onBound(context);
             
-            try (BufferedInputStream inputStream =
-                new BufferedInputStream(socket.getInputStream())) {
-                
-                byte[] data = new byte[1024];
-                int read;
-                while ((read = inputStream.read(data)) != -1) {
-                    adapter.onRead(context, Arrays.copyOf(data, read));
-                }
-            } catch (IOException e) {
-                log.warn("Exception within server", e);
+            if (!context.getSocket().isClosed()) {
+                byte[] buffer = new byte[1024];
+                do {
+                    // No op, context will call onRead
+                } while (context.blockingRead(buffer) != -1);
             }
-            
             adapter.onInactive(context);
         }
         
     }
-
+    
     @Override
     public void close() throws Exception {
         executorService.shutdown();

@@ -1,13 +1,15 @@
 package com.kien.network.core.socket.api.adapter;
 
 import com.kien.network.core.socket.api.context.SocketContext;
+import com.kien.network.core.support.adapter.AbstractLineBasedSocketAdapter;
 
 /**
  * A Socket Adapter is the API between IO and bussiness logic, independant of
  * the underlying transport layer. Users are required to provide an
  * implementation of this interface (used through )
  */
-public sealed interface SocketAdapter<T> permits BlockingSocketAdapter, SocketChannelAdapter {
+public sealed interface SocketAdapter<T>
+    permits BlockingSocketAdapter, SocketChannelAdapter, AbstractLineBasedSocketAdapter<T> {
     /**
      * Callback run after the underlying transport is active (ready). This will be
      * call right after the SocketContext is ready, IO operation may not be

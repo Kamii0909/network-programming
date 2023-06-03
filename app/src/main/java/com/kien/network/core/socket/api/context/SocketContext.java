@@ -50,7 +50,8 @@ public sealed interface SocketContext<T>
      * Request a read operation from the underlying socket, triggering
      * {@link SocketAdapter#onRead(SocketContext, byte[])} to be called. This method
      * blocks until {@link SocketAdapter#onRead(SocketContext, byte[]) onRead}
-     * returns if any data was read.
+     * returns if any data was read. Otherwise this method returns immediately as a
+     * noop, effectively making this call implicitly non blocking.
      */
     void read();
     

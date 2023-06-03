@@ -24,9 +24,15 @@ public sealed interface BlockingSocketContext extends SocketContext<Socket> perm
             throw new IllegalArgumentException("BlockingSocketContext only accept byte[] and ByteBuffer");
         }
     }
-
+    
     @Override
     BlockingSocketAdapter getSocketAdapter();
-        
     
+    /**
+     * Block the thread until new data comes up.
+     * 
+     * @param buffer the buffer to be used
+     * @return the number of byte read, or -1 if end of stream
+     */
+    int blockingRead(byte[] buffer);
 }

@@ -39,6 +39,7 @@ public class PollingTCPServer extends AbstractWebServer {
         while (true) {
             try {
                 SocketChannel socketChannel = serverSocket.accept();
+                socketChannel.configureBlocking(false);
                 socketHandler.handle(socketChannel);
             } catch (IOException e) {
                 log.warn("Unable to accept new connection", e);
