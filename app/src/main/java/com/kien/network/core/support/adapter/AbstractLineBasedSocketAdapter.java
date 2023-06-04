@@ -5,6 +5,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.stream.Stream;
 
 import com.google.common.base.Splitter;
 import com.kien.network.core.DelimiterConstants;
@@ -117,10 +118,38 @@ public abstract non-sealed class AbstractLineBasedSocketAdapter<T> implements So
      */
     protected abstract void newLineRead(String newLine);
     
-    protected final void sendLine(String line) {
+    /**
+     * Send to the peer a string. Multi line will not be correctly handled
+     * 
+     * @param string a single line string
+     */
+    protected final void sendLine(String string) {
+        sendSingleLine(string);
+        context.flush();
+    }
+    
+    /**
+     * Send to the peer a possibly multi line string. Make best effort to convert LF
+     * line separator to HTTP convention CRLF
+     * 
+     * @param string a single line or multi line string
+     */
+    protected final void sendMultiLineString(String string) {
+        if (string.contains("\r\n")) {
+            Stream.of(string.split("\r\n")).forEach(this::sendSingleLine);
+        } else if (string.contains("\n")) {
+            // There is multi-line involved
+            Stream.of(string.split("\n")).forEach(this::sendSingleLine);
+        } else {
+            sendSingleLine(string);
+        }
+        context.write(LINE_SEPARATOR);
+        context.flush();
+    }
+    
+    private final void sendSingleLine(String line) {
         context.write(line.getBytes(UTF_8));
         context.write(LINE_SEPARATOR.getBytes(UTF_8));
-        context.flush();
     }
     
     protected final void closeSocket() {

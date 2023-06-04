@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "NoClientTelnetServerMain",
+            "request": "launch",
+            "mainClass": "edu.hust.it4060.homework.week4.NoClientTelnetServerMain",
+            "projectName": "homework"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "edu.hust.it4060.homework.multiplexing.server.Main",
+            "projectName": "homework"
+        },
+        {
+            "type": "java",
             "name": "NoClientChatServerMain",
             "request": "launch",
             "mainClass": "edu.hust.it4060.homework.week3.NoClientChatServerMain",

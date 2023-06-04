@@ -51,5 +51,4 @@ public abstract class AbstractLineBasedSocketChannelAdapter extends AbstractLine
     protected final SocketAddress getRemoteSocketAddress() {
         return ExceptionUtils.unlikely(() -> getContext().getSocket().getRemoteAddress());
     }
-    
 }

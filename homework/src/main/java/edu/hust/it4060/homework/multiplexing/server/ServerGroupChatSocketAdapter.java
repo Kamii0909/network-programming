@@ -14,7 +14,7 @@ class ServerGroupChatSocketAdapter extends AbstractLineBasedSocketChannelAdapter
     private static final Logger log = LoggerFactory.getLogger(ServerGroupChatSocketAdapter.class);
     private static final List<ServerGroupChatSocketAdapter> clients =
         Collections.synchronizedList(new ArrayList<>());
-    private static Splitter splitter = Splitter.on(": ");
+    private static final Splitter SPLITTER = Splitter.on(": ");
     private boolean connected;
     private String username;
     private String userId;
@@ -40,7 +40,7 @@ class ServerGroupChatSocketAdapter extends AbstractLineBasedSocketChannelAdapter
     }
     
     private boolean login(String line) {
-        List<String> splitToList = splitter.splitToList(line);
+        List<String> splitToList = SPLITTER.splitToList(line);
         if (splitToList.size() != 2) {
             return false;
         }
