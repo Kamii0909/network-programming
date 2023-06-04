@@ -143,7 +143,7 @@ public abstract non-sealed class AbstractLineBasedSocketAdapter<T> implements So
         } else {
             sendSingleLine(string);
         }
-        context.write(LINE_SEPARATOR);
+        context.write(LINE_SEPARATOR.getBytes(UTF_8));
         context.flush();
     }
     

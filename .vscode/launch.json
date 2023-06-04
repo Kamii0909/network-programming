@@ -6,6 +6,14 @@
     "configurations": [
         {
             "type": "java",
+            "name": "HttpServerMain",
+            "request": "launch",
+            "mainClass": "edu.hust.it4060.homework.week5.HttpServerMain",
+            "projectName": "homework",
+            "vmArgs": "--enable-preview"
+        },
+        {
+            "type": "java",
             "name": "NoClientTelnetServerMain",
             "request": "launch",
             "mainClass": "edu.hust.it4060.homework.week4.NoClientTelnetServerMain",

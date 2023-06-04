@@ -15,5 +15,5 @@ public class TelnetServerSocketAdapterProvider implements SocketChannelAdapterPr
     
     public SocketChannelAdapter get(SocketChannel socket) {
         return new TelnetServerSocketAdapter();
-    };
+    }
 }
